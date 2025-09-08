@@ -1,0 +1,25 @@
+// THSM EP1 support for tamago/arm
+// https://github.com/usbarmory/tamago
+//
+// Copyright (c) The TamaGo Authors. All Rights Reserved.
+//
+// Use of this source code is governed by the license
+// that can be found in the LICENSE file.
+
+//go:build !linkprintk
+
+package thsm_ep1
+
+import (
+	_ "unsafe"
+
+	"github.com/usbarmory/tamago/soc/nxp/imx6ul"
+)
+
+// On the THSM EP1 the serial console is UART1, therefore standard
+// output is redirected there.
+
+//go:linkname printk runtime.printk
+func printk(c byte) {
+	imx6ul.UART1.Tx(c)
+}
