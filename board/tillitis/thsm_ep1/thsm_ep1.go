@@ -37,6 +37,8 @@ func Init() {
 
 	// ECP5 expects a 500k baudrate
 	imx6ul.UART3.Baudrate = 500000
+	// ECP5 uses CTS
+	imx6ul.UART3.Flow = true
 	imx6ul.UART3.Init()
 
 	// initialize console
